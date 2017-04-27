@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  frontend:
+    image: nginx
+    container_name: frontend
+    volumes:
+      - ./frontend.conf:/etc/nginx/conf.d/frontend.conf
+    links:
+      - backend1
+      - backend2
+    ports:
+      - 127.0.0.1:8080:8080
+      - 127.0.0.1:8081:8081
+  backend1:
+    image: nginx
+    container_name: backend1
+    volumes:
+      - ./backend.conf:/etc/nginx/conf.d/backend.conf
+      - ./index1.html:/var/www/index.html
+  backend2:
+    image: nginx
+    container_name: backend2
+    volumes:
+      - ./backend.conf:/etc/nginx/conf.d/backend.conf
+      - ./index2.html:/var/www/index.html
